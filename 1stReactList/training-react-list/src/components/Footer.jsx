@@ -8,7 +8,7 @@ const Footer = (props) => {
                 {props.length ===1  ? "1 item left" : `${props.length} items left`}
             </p>
             <p style={{fontSize: "14px"}}>
-                Copyright &copy; {today.getFullYear()} by Me
+               Так так {today.getFullYear()} Так так
             </p>
         </footer>
     )
