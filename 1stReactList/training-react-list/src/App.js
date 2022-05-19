@@ -2,9 +2,11 @@ import './App.css';
 import Content from './components/Content';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import AddItems from './components/AddItems';
 import Search from './components/Search';
+import apiReq from './components/apiReq';
+
 
 // [
 //   {
@@ -40,9 +42,19 @@ import Search from './components/Search';
 //       }
 //     ]
 const App = () => {
-  //* posts and their commands
-    const [items, setItems] = useState(JSON.parse(localStorage.getItem("list")));
-    const handleCheck = (id) => {
+  
+  const [items, setItems] = useState([]);
+  const [newItem, setNewItem] = useState('');
+  const [search, setSearch] = useState(''); 
+  const [fetchErr, setFetchErr] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+
+  const API_URL = "http://localhost:3500/items";
+
+//* posts and their commands
+      // JSON.parse(localStorage.getItem("list")) ||
+    const handleCheck = async (id) => {
       console.log(`${id}`);
       //! mapping items to setItem , because can't change true state, better way is map
       let itemList = items.map(item => item.id === id ? {
@@ -50,12 +62,33 @@ const App = () => {
       } : item)
       setAndSaveItems(itemList)
       localStorage.setItem("list", JSON.stringify(itemList))
+
+      const myItem = itemList.filter(item => item.id === id );
+      const updateOptions = {
+        method: 'PATCH',
+        headers: {
+          'Content-Type':'application/json'          
+        },
+        body: JSON.stringify({checked: myItem[0].checked})
+      };
+      const reqUrl = `${API_URL}/${id}`; 
+      const result = await apiReq(reqUrl, updateOptions); 
+      if (result) setFetchErr(result);
     }
-    const handleDelete = (id) => {
+
+    const handleDelete = async (id) => {
       let itemList = items.filter(item => item.id !== id);
       console.log(itemList);
       setAndSaveItems(itemList)
-      
+
+      // const myItem = itemList.filter(item => item.id === id );
+      const deleteOptions = {method: 'DELETE'};
+
+      const reqUrl = `${API_URL}/${id}`; 
+
+      const result = await apiReq(reqUrl , deleteOptions)
+      if (result) setFetchErr(result);
+
     }
     const handleDeleteAll = () => {
         let itemList = items.filter(item => item.checked === false);
@@ -76,9 +109,8 @@ const App = () => {
       console.log(itemList);
       setItems(itemList)
   }
-    
-  //* input text for creation new post
-    const [newItem, setNewItem] = useState('');
+
+//* input text for creation new post
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -90,23 +122,56 @@ const App = () => {
 
     }
 
-    const addItem = (item) =>{
+    const addItem = async (item) =>{
       const id = items.length ? items[items.length - 1].id + 1 : 1;
       console.log(id);
       let myNewItem = {id: id, checked: false, item: item,};
       console.log(myNewItem);
       let itemList = [...items, myNewItem];
       setAndSaveItems(itemList)
+
+      const postOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify(myNewItem)
+      }
+      const result = await apiReq(API_URL, postOptions)
+      if (result) setFetchErr(result);
     }
 
-//* search
-    const [search, setSearch] = useState(''); 
 
-
+    
     const setAndSaveItems = (itemList) =>{
       setItems(itemList)
       localStorage.setItem("list", JSON.stringify(itemList))
     }
+
+//* effect
+
+  useEffect(() => { 
+    const fetchItems =  async () =>{
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw Error('Server error');
+        const itemList = await response.json();
+        setItems(itemList); 
+        setFetchErr(null);
+      } catch (error) {
+        setFetchErr(error.message);
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    console.log('log by useEffect');
+
+    setTimeout(() => {
+      fetchItems();      
+    }, 2000);
+
+  }, [])
+
 
   return (
     <div className="App">
@@ -118,16 +183,20 @@ const App = () => {
         setNewItem={setNewItem}
         // addItem={addItem}
       />
-      <Content 
-        items={items.filter( item=> ((item.item).toLowerCase().includes(search.toLowerCase()) ))}
-         
-        // setItems={setItems}
-        handleCheck = {handleCheck}
-        handleDelete = {handleDelete}
-        handleFocusAll = {handleFocusAll}
-        handleDeleteAll = {handleDeleteAll}
-        handleUnFocusAll ={handleUnFocusAll}
-      />
+      <main>
+        {isLoading && <p style={{color: "lightgreen", verticalAlign: "center"}}>Wait please, loading... </p>}
+        {fetchErr && <p style={{color: "red"}}> {`Server error: ${fetchErr}`} </p>}
+        {!fetchErr && !isLoading && <Content 
+          items={items.filter( item=> ((item.item).toLowerCase().includes(search.toLowerCase()) ))}
+          
+          // setItems={setItems}
+          handleCheck = {handleCheck}
+          handleDelete = {handleDelete}
+          handleFocusAll = {handleFocusAll}
+          handleDeleteAll = {handleDeleteAll}
+          handleUnFocusAll ={handleUnFocusAll}
+        />}
+      </main>
       <Footer length={items.length}/>
     </div>
   );

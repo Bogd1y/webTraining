@@ -10,7 +10,7 @@ const Content = ({handleDelete, items, handleCheck,handleDeleteAll, handleFocusA
 
 
     return (
-        <main>
+        <>
             {items.length === 0 ? (
                 <p className='empty'>List is empty</p> 
             ) : (
@@ -23,7 +23,7 @@ const Content = ({handleDelete, items, handleCheck,handleDeleteAll, handleFocusA
                     handleUnFocusAll={handleUnFocusAll}
                 />
             )}
-        </main>
+        </>
     )
 }
 
