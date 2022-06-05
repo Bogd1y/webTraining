@@ -1,0 +1,13 @@
+.logotipchik{
+    display: block;
+    /* position: absolute; */
+    max-height: 70px;
+}
+@media(max-width: 500px){
+    .logotipchik{
+        display: none;
+        position: absolute;
+        
+    }
+}
+    

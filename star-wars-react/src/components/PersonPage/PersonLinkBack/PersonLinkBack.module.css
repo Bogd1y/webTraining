@@ -1,0 +1,20 @@
+.linkBack {
+    display: inline-block;
+    background-color: rgba(245, 245, 245, 0.617);
+    border: 1px solid purple;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px 15px;
+    font-family: arial;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease 0s;
+    /* max-height: 40px; */
+    box-shadow: 0 0px 5px rgba(255, 0, 130, 0.5);
+    margin-bottom: 5px;
+}
+.linkBack:hover{
+    box-shadow: 0px 0px 20px purple;
+    color: rgb(255, 243, 243);
+    text-shadow: 1px 0 2.5px var(--color-yellow);
+}

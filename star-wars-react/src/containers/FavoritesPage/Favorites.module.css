@@ -1,0 +1,25 @@
+.conta{
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: center;
+}
+.textM{
+    text-align: center;
+    color: var(--color-yellow);
+    text-shadow: 0 0 4px var(--color-yellow);
+}
+.textL {
+    font-size: 16px;
+    color: var(--color-yellow);
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease 0s;
+    text-shadow: 0 0 4px var(--color-yellow);
+}
+.textL:hover{
+    text-decoration: underline;
+    text-shadow: 0 0 16px var(--color-yellow);
+
+}

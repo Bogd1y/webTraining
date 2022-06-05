@@ -1,0 +1,28 @@
+.bigText {
+    font-family: fantasy;
+    background-image: url(../../assets/purple-space-stars-sololos.jpg);
+    /* background-repeat: repeat; */
+    /* background-attachment: fixed; */
+    margin-top: -6rem;
+    background-position: center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 120px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.bigTextSpan {
+    font-size: 90px;
+}
+.paragraph {
+    font-size: 32px;
+    font-family: impact;
+    text-align: center;
+    margin-top: -4.5rem;
+    background: -webkit-linear-gradient(rgb(94, 0, 137), rgb(22, 5, 130));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

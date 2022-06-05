@@ -1,0 +1,37 @@
+.themeList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin-left: -40px;
+}
+.themeList li {
+    border-radius: 10px;
+}
+.themeList li button    {
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--color-yellow);
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    /* max-width: 300px;
+    max-height: 100px; */
+}
+.themeList li button img{
+    max-height: 500px;
+    max-width: 260px;
+    min-height: 500px;
+    min-width: 260px;
+    border-radius: 5px;
+}
+.darkItem:hover{
+    box-shadow: 0 2px 10px red;
+}
+.lightItem:hover{
+    box-shadow: 0 2px 10px green;
+    
+}
+.soloItem:hover{
+    box-shadow: 0 2px 10px purple;
+
+}

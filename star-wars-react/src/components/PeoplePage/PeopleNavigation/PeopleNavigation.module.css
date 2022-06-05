@@ -1,0 +1,40 @@
+.buttonchikEnjoyer{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.buttonchik {
+    display: inline-block;
+    background-color: whitesmoke;
+    border: 1px solid purple;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px 15px;
+    font-family: arial;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease 0s;
+    /* max-height: 40px; */
+    box-shadow: 0 0px 5px rgba(255, 0, 130, 0.5)
+}
+.buttonchik:hover{
+    box-shadow: 0px 0px 20px purple;
+}
+span{
+    transition: all 0.3s ease 0s;
+    display: inline-block;
+    
+}
+.buttonchik:hover .spanR {
+    transform: scale(1.2) translate(5px, 0);
+}
+
+.spanL{
+    transform: rotate(180deg) translate(0px, -2px);
+}
+.buttonchik:hover .spanL {
+    transform: rotate(180deg) scale(1.2) translate(5px, 0) translate(0px, -2px);
+}
+
+
