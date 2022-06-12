@@ -176,7 +176,7 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      <Search search={search} setSearch={setSearch}/>
+      <Search search={search} setSearch={setSearch} />
       <AddItems
         newItem = {newItem}
         handleSubmit = {handleSubmit}

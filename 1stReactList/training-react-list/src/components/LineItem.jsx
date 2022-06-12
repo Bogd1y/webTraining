@@ -3,9 +3,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 const LineItem = ({handleCheck, handleDelete, item, handleDeleteAll}) =>{
     return (
-        <li className="item" 
-        // key={item.id} can be removed bcs in parent we have id
-        >
+        <li className="item" >
             <input
                 type="checkbox"
                 checked={item.checked}
