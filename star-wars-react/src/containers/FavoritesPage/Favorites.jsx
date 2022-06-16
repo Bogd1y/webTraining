@@ -6,7 +6,7 @@ import styles from './Favorites.module.css'
 
 const Favorites = () => {
   const storeData = useSelector(store => store.favorite)
-  console.log(storeData);
+  // console.log(storeData);
     if (storeData.length === 0) { 
       return <>
         <h1 className={styles.textM} >No favorites yet </h1>

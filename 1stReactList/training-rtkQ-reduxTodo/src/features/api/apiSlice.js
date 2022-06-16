@@ -24,7 +24,7 @@ export const apiSlice = createApi({
                 method: 'PATCH',
                 body: todo
             }),
-            invalidatesTags: ['Todos']            
+            invalidatesTags: ['Todos']
         }),
         deleteTodo: builder.mutation({
             query: ({id}) => ({

@@ -6,6 +6,7 @@ import { getPeopleId, getPeopleImage } from '../../services/getPeopleData';
 import PeopleList from '../../components/PeoplePage/PeopleList';
 import { useQueryParams } from '../../hooks/useQueryParams';
 import PeopleNavigation from '../../components/PeoplePage/PeopleNavigation/PeopleNavigation';
+import Loader from '../../components/Loader/Loader';
 
 function PeoplePage(props) {
     const [people, setPeople] = useState('');
@@ -13,6 +14,7 @@ function PeoplePage(props) {
     const [nextPage, setNextPage] = useState('');
     const [counterPage, setCounterPage] = useState(1);
     const [maxPages, setMaxPages] = useState(5);
+    const [isLoading, setIsLoading] = useState(true);
 
 
     const query =useQueryParams();
@@ -24,7 +26,6 @@ function PeoplePage(props) {
     // debugger
     const getResource = async (url) => {
         const result = await getApiData(url);
-            console.log(result);
 
             if (result) {
                 // debugger
@@ -47,10 +48,11 @@ function PeoplePage(props) {
                 setNextPage(result.next)
                 setMaxPages(result.count)
                 props.setErrorApi(false) // comes from hoc props
-                
+                setIsLoading(false)
             } else {
                 props.setErrorApi(true)
             }
+            
     }
 
     useEffect(() => {
@@ -63,13 +65,16 @@ function PeoplePage(props) {
 
     return (
         <>
+        {isLoading && <Loader />}
+         {!isLoading &&
             <PeopleNavigation 
-                prevPage={prevPage}
-                nextPage={nextPage}
-                counterPage={counterPage}
-                maxPages={highMaxPages}
+            prevPage={prevPage}
+            nextPage={nextPage}
+            counterPage={counterPage}
+            maxPages={highMaxPages}
             />
-            {people && <PeopleList people={people} />}
+        }   
+        {people && <PeopleList people={people} />}
         </>
     )
 }
