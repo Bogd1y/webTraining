@@ -225,6 +225,9 @@ body {
   font-weight: 500;
   cursor: pointer;
 }
+.navbar__link:hover {
+  text-decoration: underline;
+}
 
 .hovered {
   color: #00A4E5;
@@ -374,11 +377,16 @@ body {
   margin-top: 11px;
 }
 
-.capabilite__button {
+.capabilites__button {
   cursor: pointer;
   padding: 11px 29px;
   color: #fff;
   background-color: #00A4E5;
+  transition: all 0.3s ease 0s;
+}
+.capabilites__button:hover{
+  background-color: #00668f;
+  transform: scale(1.02);
 }
 
 .item {
@@ -460,6 +468,12 @@ body {
   padding: 11px 26px;
   cursor: pointer;
   margin-bottom: 231px;
+  transition: all 0.3s ease 0s;
+  border-radius: 5px;
+}
+.getint__button:hover{
+  transform: scale(1.2);
+  border-radius: 0px;
 }
 
 .signup {
@@ -467,6 +481,7 @@ body {
   z-index: 10;
   position: relative;
   top: -1.5px;
+  transform: scale(1.05);
 }
 
 .signup__content {
@@ -492,6 +507,9 @@ body {
 .signup__form input {
   padding: 11px 98px 11px 16px;
 }
+.signup__form input:focus::placeholder {
+  color: transparent;
+}
 
 .signup__button {
   position: relative;
@@ -500,6 +518,11 @@ body {
   padding: 11px 49px 11px 48px;
   color: white;
   font-weight: 500;
+  transition: all 0.3s ease 0s;
+}
+.signup__button:hover {
+  transform: translate(5px, 0);
+ border-radius: 0 10px 10px 0;
 }
 
 .footer {
@@ -561,18 +584,31 @@ body {
   font-size: 11px;
   line-height: 25px;
   letter-spacing: 0.8461539149284363px;
+  cursor: pointer;
+}
+.links__item:hover {
+  text-decoration: underline;
 }
 
 .faq__item {
   font-size: 11px;
   line-height: 25px;
   letter-spacing: 0.8461539149284363px;
+  cursor: pointer;
 }
+.faq__item:hover {
+  text-decoration: underline;
+}
+
 
 .blog__item {
   font-size: 11px;
   line-height: 25px;
   letter-spacing: 0.8461539149284363px;
+  cursor: pointer;
+}
+.blog__item:hover{
+  text-decoration: underline;
 }
 
 .contacts__label {
@@ -620,8 +656,18 @@ body {
   margin-right: 25px;
   height: 12px;
   width: 12px;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+}
+.icons__ico:hover{
+  transform: scale(1.5);
 }
 
 .icons__ico:last-child {
   margin: 0px 0px 0px 0px;
+}
+
+.icons__ico:nth-child(2) {
+position: relative;
+left: -4px;
 }
