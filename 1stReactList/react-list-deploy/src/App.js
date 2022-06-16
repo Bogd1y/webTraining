@@ -24,7 +24,7 @@ const App = () => {
       ...item, checked: !item.checked
     } : item)
     setAndSaveItems(itemList)
-    localStorage.setItem("list", JSON.stringify(itemList))
+    // localStorage.setItems("list", JSON.stringify(itemList))
   }
 
   const handleDelete = async (id) => {
@@ -34,15 +34,15 @@ const App = () => {
   }
   const handleDeleteAll = () => {
     let itemList = items.filter(item => item.checked === false);
-    setItems(itemList)
+    setAndSaveItems(itemList)
   }
   const handleFocusAll = () => {
     let itemList = items.map((item) => ({ ...item, checked: true }));
-    setItems(itemList)
+    setAndSaveItems(itemList)
   }
   const handleUnFocusAll = () => {
     let itemList = items.map((item) => ({ ...item, checked: false }));
-    setItems(itemList)
+    setAndSaveItems(itemList)
   }
 
   //* input text for creation new post
@@ -55,14 +55,13 @@ const App = () => {
 
   }
 
-  const addItem = async (item) => {
+  const addItem = (item) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1;
 
     let myNewItem = { id: id, checked: false, item: item, };
     let itemList = [...items, myNewItem];
 
     setAndSaveItems(itemList)
-    JSON.stringify(myNewItem)
   }
 
 
@@ -75,10 +74,10 @@ const App = () => {
   //* effect
 
   useEffect(() => {
-    const fetchItems = async () => {
+    const fetchItems = () => {
       try {
-
-        setItems(JSON.parse(localStorage.getItem("list")));
+        if (!JSON.parse(localStorage.getItem("list"))) {setAndSaveItems([])}
+        setItems(JSON.parse(localStorage.getItem("list")))
         setFetchErr(null);
       } catch (error) {
         setFetchErr(error.message);
@@ -89,10 +88,10 @@ const App = () => {
 
     setTimeout(() => {
       fetchItems();
-    }, 2000);
+    }, 1500);
 
   }, [])
-
+console.log(items);
 
   return (
     <div className="App">
@@ -106,7 +105,7 @@ const App = () => {
       <main>
         {isLoading && <p style={{ color: "lightgreen", verticalAlign: "center" }}>Wait please, loading... </p>}
         {fetchErr && <p style={{ color: "red" }}> {`Server error: ${fetchErr}`} </p>}
-        {!fetchErr && !isLoading && <Content
+        {!fetchErr && !isLoading && items &&  <Content
           items={items.filter(item => ((item.item).toLowerCase().includes(search.toLowerCase())))}
 
           handleCheck={handleCheck}
@@ -116,7 +115,7 @@ const App = () => {
           handleUnFocusAll={handleUnFocusAll}
         />}
       </main>
-      <Footer length={items.length} />
+      {items ? <Footer length={items.length}/>: <Footer length={0}/> }
     </div>
   );
 }
