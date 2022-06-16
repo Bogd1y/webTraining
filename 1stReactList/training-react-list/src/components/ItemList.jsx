@@ -11,21 +11,6 @@ const ItemList = ({handleCheck, handleDelete, items, handleDeleteAll, handleFocu
                 handleDelete={handleDelete}
                 handleDeleteAll={handleDeleteAll}
             />
-                // <li className="item" key={item.id}>
-                //     <input
-                //         type="checkbox"
-                //         checked={item.checked}
-                //         onChange={() => handleCheck(item.id)}
-                //     />
-                //     <label
-                //     // ! style trinary expression
-                //         style={(item.checked) ? {textDecoration: 'line-through'} : null}
-                //         onDoubleClick={() => handleCheck(item.id)}
-                //     >{item.item}</label> 
-                //     <FaTrashAlt
-                //      role="button" tabIndex="0" onClick={() =>handleDelete(item.id)}
-                //     />
-                // </li>
         ))}
 
         <div className="flexing">

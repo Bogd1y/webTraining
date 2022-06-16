@@ -56,7 +56,7 @@ const App = () => {
       // JSON.parse(localStorage.getItem("list")) ||
     const handleCheck = async (id) => {
       console.log(`${id}`);
-      //! mapping items to setItem , because can't change true state, better way is map
+      //! mapping items to setItem
       let itemList = items.map(item => item.id === id ? {
           ...item, checked: !item.checked
       } : item)
@@ -81,7 +81,6 @@ const App = () => {
       console.log(itemList);
       setAndSaveItems(itemList)
 
-      // const myItem = itemList.filter(item => item.id === id );
       const deleteOptions = {method: 'DELETE'};
 
       const reqUrl = `${API_URL}/${id}`; 
@@ -96,16 +95,12 @@ const App = () => {
         setItems(itemList)
     }
     const handleFocusAll = () => {
-        // let itemList = items.map((item) => ({...item, checked: !item.checked}) );
         let itemList = items.map((item) => ({...item, checked: true}) );
-        // let itemList = items.map(item => item.checked ?  {...item, checked: !true} : {...item, checked: true})
         console.log(itemList);
         setItems(itemList)
     }
     const handleUnFocusAll = () => {
-      // let itemList = items.map((item) => ({...item, checked: !item.checked}) );
       let itemList = items.map((item) => ({...item, checked: false}) );
-      // let itemList = items.map(item => item.checked ?  {...item, checked: !true} : {...item, checked: true})
       console.log(itemList);
       setItems(itemList)
   }
@@ -181,7 +176,6 @@ const App = () => {
         newItem = {newItem}
         handleSubmit = {handleSubmit}
         setNewItem={setNewItem}
-        // addItem={addItem}
       />
       <main>
         {isLoading && <p style={{color: "lightgreen", verticalAlign: "center"}}>Wait please, loading... </p>}
@@ -189,7 +183,6 @@ const App = () => {
         {!fetchErr && !isLoading && <Content 
           items={items.filter( item=> ((item.item).toLowerCase().includes(search.toLowerCase()) ))}
           
-          // setItems={setItems}
           handleCheck = {handleCheck}
           handleDelete = {handleDelete}
           handleFocusAll = {handleFocusAll}
