@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "checked": false,
+      "item": "Tea"
+    },
+    {
+      "id": 2,
+      "checked": false,
+      "item": "Coffee"
+    },
+    {
+      "id": 3,
+      "checked": true,
+      "item": "Milk"
+    },
+    {
+      "id": 4,
+      "checked": true,
+      "item": "Mojito"
+    },
+    {
+      "id": 5,
+      "checked": true,
+      "item": "Water"
+    },
+    {
+      "id": 6,
+      "checked": true,
+      "item": "Wine"
+    }
+  ]
+}
